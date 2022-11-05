@@ -1,16 +1,17 @@
 import qrcode
 
-cont = int(input('quantos qrcodes serão gerados: '))
-cor = input('digite a cor que deseja para o preenchimento: ')
-pCor = "'"+cor+"'"
-for i in range(0, cont):
+cont = int(input('quantidade de qrcode: '))
+cor = input('cor do preenchimento: ')
+corB = input('cor do fundo: ')
+for i in range(cont):
     qr = input('link para ser convertido: ')
     qrc = qrcode.QRCode(
-        version=None,
-        error_correction=qrcode.ERROR_CORRECT_H
+        None,
+        qrcode.ERROR_CORRECT_H,
+        border=2.5
     )
     qrc.add_data(qr)
     img = qrc.make_image(fill_color=cor,
-                         back_color='#FFFFFF')
+                         back_color=corB)
     type(img)
-    img.save(f'{i}.png')
+    img.save(f'qrcodes/{i}.png')
